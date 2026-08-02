@@ -1,0 +1,78 @@
+{
+  "project": "ALBAZ MoonCalc Pro",
+  "release": "v0.10.8",
+  "lock_id": "allawi-v9.6.3-audited-image-parity",
+  "reference": {
+    "name": "Allawi_Hilal_Map_v9_6_3_AUDITED_SOURCE_LOCKED.html",
+    "sha256": "7a142e2d2f6657b13a862985129d0ea4ab45bbdfd675bac24c26524614fee0b3",
+    "embedded_in_release": false,
+    "reason_not_embedded": "The reference contains a commercial embedded font; only audited non-font map assets and logic were transferred."
+  },
+  "basemap": {
+    "path": "app/resources/allawi_reference_basemap.png",
+    "sha256": "e6c26ad08072b8ed173959157278dd2954781d6d3854b5feb4f747d3bb4bd17d",
+    "width_px": 2048,
+    "height_px": 950,
+    "plot_bounds_px": {
+      "left": 88,
+      "right": 1960,
+      "top": 59,
+      "bottom": 891
+    },
+    "projection": "equirectangular",
+    "longitude_extent_deg": [
+      -180,
+      180
+    ],
+    "latitude_extent_deg": [
+      -80,
+      80
+    ],
+    "scientific_color_latitude_extent_deg": [
+      -60,
+      60
+    ]
+  },
+  "calculation": {
+    "observation_time": "sunset + (4/9) * lunar_lag",
+    "geometry": "airless topocentric Sun-centre and Moon-centre geometry",
+    "arcv": "moon_altitude - sun_altitude",
+    "arcl": "centre-to-centre angular separation",
+    "width_arcmin": "moon_semidiameter_arcmin * (1 - cos(arcl_deg))",
+    "qa": "width_arcmin + arcv_deg/6 - 1.25",
+    "minimum_elongation_deg": 4.5,
+    "thresholds": {
+      "A": 1.0,
+      "B": 0.0,
+      "C": -0.25
+    },
+    "impossible_X": "central conjunction after local sunset or non-positive lunar lag",
+    "unavailable_unknown": "no valid solution"
+  },
+  "render": {
+    "validated_grid_nodes": 10800,
+    "validated_longitude_step_deg": 2,
+    "validated_latitude_step_deg": 2,
+    "palette": {
+      "A": "#007700",
+      "B": "#00FF00",
+      "C": "#FFFF00",
+      "D": "#FF0000",
+      "X": "#000000",
+      "?": null
+    },
+    "cell_alpha": 0.82,
+    "cell_gap": "clamp(source_cell_width * 0.11, 0.7px, 1.5px)",
+    "x_frontier": "narrow antialiased display contour derived from the same discrete X mask",
+    "selected_site_marker": "source-style red halo, ring, core, crosshair, leader and dark label",
+    "screen_export_report_same_composite": true,
+    "validated_grid_cells": 10800,
+    "grid_sampling": "cell-centred: lon=-179..179, lat=-59..59 at 2-degree steps"
+  },
+  "forbidden_legacy_paths": [
+    "solar altitude -4 degree observation solver",
+    "bright-limb Allawi ARCV/ARCL",
+    "5.5/7 degree post-processing",
+    "manual map displacement or date calibration"
+  ]
+}
