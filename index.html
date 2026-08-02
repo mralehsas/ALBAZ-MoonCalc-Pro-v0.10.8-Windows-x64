@@ -29,7 +29,7 @@ small{color:#aab5ca}
   if(!("DecompressionStream" in window)) throw new Error("المتصفح لا يدعم فك الضغط المطلوب.");
   const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
   const originalHtml=await new Response(stream).text();
-  const patches='<script src="rc2-fix.js?v=20260802-rc2"><\/script><script src="rc3-allawi-fix.js?v=20260802-rc3b"><\/script><script src="rc3-allawi-map.js?v=20260802-rc3c"><\/script>';
+  const patches='<script src="rc2-fix.js?v=20260802-rc2"><\/script><script src="rc3-allawi-fix.js?v=20260802-rc3d"><\/script><script src="rc3-allawi-map.js?v=20260802-rc3c"><\/script>';
   const html=originalHtml.includes('</body>')
     ? originalHtml.replace('</body>',patches+'</body>')
     : originalHtml+patches;
