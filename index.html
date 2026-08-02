@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#050914">
-<meta name="description" content="ALBAZ MoonCalc Web — برنامج رؤية الهلال داخل المتصفح.">
-<title>ALBAZ MoonCalc Web</title>
+<meta name="description" content="ALBAZ MoonCalc Web RC2 — برنامج رؤية الهلال داخل المتصفح.">
+<title>ALBAZ MoonCalc Web RC2</title>
 <style>
 body{margin:0;background:#050914;color:#f5f7fb;font-family:"Segoe UI",Tahoma,Arial,sans-serif;display:grid;place-items:center;min-height:100vh}
-main{text-align:center;padding:30px}
+main{text-align:center;padding:30px;max-width:680px}
 i{display:block;width:52px;height:52px;border:4px solid #26334c;border-top-color:#e8bd58;border-radius:50%;margin:0 auto 18px;animation:r 1s linear infinite}
 @keyframes r{to{transform:rotate(360deg)}}
 small{color:#aab5ca}
 </style>
 </head>
 <body>
-<main><i></i><h1>ALBAZ MoonCalc Web</h1><small>جاري تشغيل المحرك الفلكي…</small></main>
+<main><i></i><h1>ALBAZ MoonCalc Web RC2</h1><small>جاري تشغيل المحرك الفلكي المصحح…</small></main>
 <script>
 (async()=>{
  try{
@@ -28,10 +28,12 @@ small{color:#aab5ca}
   const bytes=Uint8Array.from(atob(parts.join("")),c=>c.charCodeAt(0));
   if(!("DecompressionStream" in window)) throw new Error("المتصفح لا يدعم فك الضغط المطلوب.");
   const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));
-  const html=await new Response(stream).text();
-  document.open();
-  document.write(html);
-  document.close();
+  const originalHtml=await new Response(stream).text();
+  const patch='<script src="rc2-fix.js?v=20260802-rc2"><\/script>';
+  const html=originalHtml.includes('</body>')
+    ? originalHtml.replace('</body>',patch+'</body>')
+    : originalHtml+patch;
+  document.open(); document.write(html); document.close();
  }catch(error){
   document.body.innerHTML="<main><h1>تعذر تشغيل النسخة الويب</h1><p>"+error.message+"</p><p>حدّث المتصفح إلى آخر إصدار ثم أعد المحاولة.</p></main>";
  }
