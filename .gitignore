@@ -1,0 +1,20 @@
+# Windows distribution and build outputs
+*.exe
+*.dll
+*.pyd
+*.pak
+*.zip
+_internal/
+dist/
+build/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
